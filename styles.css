@@ -6,9 +6,19 @@
 
 
 html, body {
-  overflow-x: hidden;
-  overscroll-behavior-x: none;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
+#pin.page,
+#home.page,
+#qr.page {
   touch-action: pan-y;
+  overflow-y: auto;
 }
 
 body {
@@ -728,17 +738,154 @@ h3 {
   height: 36px;
   object-fit: contain;
   display: block;
-  margin-top: 13.5px;
+  margin-top: 11px;
   transition: transform 0.3s ease;
   transform-origin: center center;
   flex-shrink: 0;
 }
 
 .nav-link span {
-  font-size: 11px !important;
+  font-size: 12px !important;
   line-height: 1;
   display: block;
 }
+
+
+.nav-link[data-page="homepage"] .nav-icon {
+  height: 20px;
+  width: 23.5px;
+  margin-top: 14.5px;
+}
+
+.nav-link[data-page="homepage"] span {
+  margin-top: 12px;
+}
+
+.nav-link[data-page="homepage"].active .nav-icon {
+  width: 62.5px;
+  height: 30px;
+  margin-top: 9px;
+}
+
+.nav-link[data-page="homepage"].active span {
+  color: #1b5e35;
+  font-weight: 700;
+  margin-top: 7px;
+}
+
+
+
+
+
+.nav-link[data-page="vehicles"] .nav-icon {
+  width: 24px;
+  height: 17.5px;
+  margin-top: 15.5px;
+}
+
+
+.nav-link[data-page="vehicles"] span {
+  margin-top: 13px;
+}
+
+.nav-link[data-page="vehicles"].active .nav-icon {
+  width: 63.5px;
+  height: 30.5px;
+  margin-top: 9px;
+}
+
+.nav-link[data-page="vehicles"].active span {
+  color: #1b5e35;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+
+
+
+
+.nav-link[data-page="licence-landing"] .nav-icon {
+  width: 23.5px;
+  height: 15.5px;
+  margin-top: 15.5px;   /* add px — adjust value to taste */
+}
+
+.nav-link[data-page="licence-landing"] span {
+  margin-top: 14px;
+}
+
+.nav-link[data-page="licence-landing"].active .nav-icon {
+  width:  63px;
+  height: 30.5px;
+  margin-top: 9px;
+}
+
+.nav-link[data-page="licence-landing"].active span {
+  color: #1b5e35;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+
+
+
+.nav-link[data-page="payment"] .nav-icon {
+  width: 21.5px;
+  height: 21.5px;
+  margin-top: 13.5px; 
+}
+
+.nav-link[data-page="payment"] span {
+  margin-top: 11.5px;
+}
+
+.nav-link[data-page="payment"].active .nav-icon {
+  width: 63.5px;
+  height: 30.5px;
+  margin-top: 9px;
+}
+
+.nav-link[data-page="payment"].active span {
+  color: #1b5e35;
+  font-weight: 700;
+  margin-top: 7px;
+}
+
+
+
+
+.nav-link[data-page="profile"] .nav-icon {
+  width: 15.5px;
+  height: 20px;
+  margin-top: 14px;
+}
+
+.nav-link[data-page="profile"] span {
+  margin-top: 12px;
+}
+
+
+.nav-link[data-page="profile"].active .nav-icon {
+  width: 63.5px;
+  height: 30.5px;
+  margin-top: 9px;
+}
+
+.nav-link[data-page="profile"].active span {
+  color: #1b5e35;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+
+
+
+
+
+
+
+
+
 
 .nav-link {
   -webkit-tap-highlight-color: transparent;
@@ -957,42 +1104,107 @@ h3 {
   position: relative;
 }
 
+#licence-landing .ll-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* heading — 60px from top, 28px gap before hero card */
+#licence-landing .ll-heading {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #243544;
+  margin: 0;
+  padding: 60px 0 28px 24px;
+}
+
+/* blue hero card — 366px wide, 204px high */
+#licence-landing .ll-card-hero {
+  width: 366px;
+  height: 204px;
+  min-height: 204px;
+  margin-left: 0px;
+  display: flex;
+  text-decoration: none;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
+  padding: 18px 16px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
 #licence-landing .ll-content {
-  padding: 0 16px calc(80px + env(safe-area-inset-bottom));
-  height: calc(100vh - 80px);
-  overflow-y: auto;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  height: calc(100vh - 60px - 100px);
+  padding: 0 24px;
+  box-sizing: border-box;
+  -webkit-mask: linear-gradient(
+    to bottom,
+    black 0px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
+  mask: linear-gradient(
+    to bottom,
+    black 0px,
+    black calc(100% - 40px),
+    transparent 100%
+  );
 }
 
 #licence-landing .ll-content::-webkit-scrollbar {
   display: none;
 }
 
-#licence-landing .ll-heading {
-  font-size: 34px;
-  font-weight: 700;
-  color: #1a2332;
-  margin: 0;
-  padding: 20px 0 16px;
+/* services list card — 366px wide, 431.5px high */
+/* services list card — 366px wide, 431.5px high */
+#licence-landing .ll-card:nth-of-type(1) {
+  width: 100%;
+  max-width: 366px;
+  height: 431.5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: center;
 }
 
-/* Hero blue card */
-#licence-landing .ll-card-hero {
-  display: block;
-  text-decoration: none;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 16px;
-background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
-  padding: 18px 16px;
-  min-height: 190px;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+/* all items default to 68px */
+#licence-landing .ll-card:nth-of-type(1) .ll-item {
+  height: 68px;
+  max-height: 68px;
+  box-sizing: border-box;
+  justify-content: center;
 }
+
+/* "Manage licence renewal" item — 2nd <a> in that card — 91.5px */
+#licence-landing .ll-card:nth-of-type(1) a:nth-of-type(2) {
+  height: 91.5px;
+  max-height: 91.5px;
+  justify-content: center;
+}
+
+/* verify card — size to content, not inherited height */
+#licence-landing .ll-card:nth-of-type(2) {
+  width: 100%;
+  max-width: 366px;
+  height: auto;
+}
+
+#licence-landing .ll-item-verify {
+  height: 60px;
+  min-height: 60px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+
+
+
 
 #licence-landing .ll-card-hero:active {
   opacity: 0.92;
@@ -1296,11 +1508,12 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
 }
 
 #vehicles .vehicles-heading {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 32px;
-  font-weight: 650;
+  font-weight: 700;
   color: #243544;
   margin-left: 24px;
-  margin-top: 0;       /* kill the default h1 margin */
+  margin-top: 0;
 }
 
 #vehicles .vehicles-card {
@@ -1513,7 +1726,7 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
 }
 
 #payment .payment-content {
-  padding: 0 16px 100px;
+  padding: 0 0 100px 0; 
   height: calc(100vh - 80px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1537,10 +1750,12 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
 }
 
 #payment .payment-heading {
-  font-size: 34px;
-  font-weight: 600;
-  color: #1a2332;
-  margin: 20px 0 20px;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #243544;
+  margin: 0;
+  padding: 60px 0 20px 24px;
 }
 
 #payment .payment-card {
@@ -1548,13 +1763,21 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 16px;
+  width: 366px;
+  height: 311.5px;
+  margin-left: 24px;
+  box-sizing: border-box;
 }
 
+/* center text vertically in each payment item */
 #payment .payment-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 16px;
   text-decoration: none;
   color: inherit;
+  box-sizing: border-box;
 }
 
 #payment .payment-item:active {
@@ -1625,16 +1848,18 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
 }
 
 #profile .profile-heading {
-  font-size: 34px;
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 32px;
   font-weight: 700;
-  color: #1a2332;
+  color: #243544;
   margin: 0;
-  padding: 20px 16px 16px;
+  padding: 60px 0 0 24px;
   background: #eef1f4;
 }
 
 #profile .profile-content {
   height: calc(100vh - 80px - 80px); /* minus nav, minus heading height */
+  padding: 0 0 100px 24px;
 }
 
 #profile .profile-card {
@@ -1642,6 +1867,17 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 16px;
+  width: 366px;
+  box-sizing: border-box;
+}
+
+#profile .profile-card:nth-of-type(1) {
+  height: 323px;
+  margin-top: 28.5px;
+}
+
+#profile .profile-card:nth-of-type(2) {
+  height: 279px;
 }
 
 #profile .profile-section-title {
@@ -1711,9 +1947,13 @@ background: linear-gradient(180deg, #1e2e3d 0%, #5a7a96 100%);
   display: flex;
   flex-direction: column;
   align-items: center; /* centers icon+label horizontally within each slot */
-  gap: 12px;
 }
 
+.nav-link[data-page="licence-landing"] .nav-icon {
+  width: 23.5px;
+  height: 15.5px;
+  margin-top: 16.5px;
+}
 
 
 
